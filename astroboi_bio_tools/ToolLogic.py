@@ -7,7 +7,7 @@ class ToolLogics:
         pass
 
     def complement_char(self, ch):
-        complement_char_dict = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A', 'N': 'N'}
+        complement_char_dict = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A', 'N': 'N', '-': '-'}
         try:
             return complement_char_dict[ch]
         except:

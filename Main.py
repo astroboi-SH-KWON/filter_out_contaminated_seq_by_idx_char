@@ -19,7 +19,9 @@ else:
 INPUT = "input/"
 OUTPUT = "output/"
 ANALYSIS_INFO_ARR = ["FAH pegOT2_BE analyzer.xlsx", "FAH pegOT5_BE analyzer.xlsx"]
-FILT_OUT_OPT_ARR = [{'28': 'T', '33': 'G'}, {'8': 'T', '18': 'T', '46': 'G'}]
+# FILT_OUT_OPT_ARR = [{'28': 'T', '33': 'G'}, {'8': 'T', '18': 'T', '46': 'G'}]
+FILT_OUT_OPT_ARR = [{'25': 'T', '30': 'G'}, {'8': 'T', '18': 'T', '46': 'G'}]
+STRAND_ARR = ['-', '+']
 ############### end setting env #################
 
 
@@ -39,6 +41,9 @@ def main():
             for i in range(len_df):
                 rg_seq = df.loc[i][2]
 
+                if STRAND_ARR[idx] == '-':
+                    rg_seq = logic.make_complement_string(rg_seq)[::-1]
+
                 if logic.is_contamed_seq(filt_dict, rg_seq):
                     continue
 
@@ -49,7 +54,7 @@ def main():
                 result_list.append([wt_seq, align, rg_seq, cnt, length])
 
             header = ['WT Sequence', '', 'RGEN Treated Sequence', 'Count', 'Length']
-            util.make_excel(WORK_DIR + OUTPUT + sheet_name + "_" + ANALYSIS_INFO_ARR[idx], header, result_list)
+            util.make_excel(WORK_DIR + OUTPUT + sheet_name + "__" + ANALYSIS_INFO_ARR[idx], header, result_list)
 
 
 if __name__ == '__main__':
